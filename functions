@@ -1,0 +1,105 @@
+import processing.core.*;
+public class Functions {
+	public boolean rookMovement(int mouseX, int mouseY,int keyx, int keyk) {
+		if((keyk - 20 < mouseY  && mouseY < keyk + 60 )){
+			return true; // move within same x values or y values
+		}
+		else if ((keyx - 16 < mouseX && mouseX < keyx + 64)){
+			return true; // move within same x values
+		}
+		else
+			
+			return false;
+	}
+	public boolean bishopMovement(int mouseX, int mouseY,int keyx, int keyk) {
+		int remainder  = mouseX % 80;
+		int numx = mouseX + 80 - remainder;
+		int remaindery = mouseY % 80;
+		int numy = mouseY  + 80 - remaindery;
+		int remainderkx = keyx % 80;
+		int numkx = keyx + 80 - remainderkx;
+		int remainderky = keyk % 80;
+		int numky = keyk + 80 - remainderky;	
+				if(Math.abs(numy - numky) == Math.abs(numx - numkx))
+				return true;// difference in y and x values = same in diagonal
+		else{
+			return false;
+		}
+		}
+	
+	public boolean queenMovement(int mouseX, int mouseY, int keyx, int keyk){
+		int remainder  = mouseX % 80;
+		int numx = mouseX + 80 - remainder;
+		int remaindery = mouseY % 80;
+		int numy = mouseY  + 80 - remaindery;
+		int remainderkx = keyx % 80;
+		int numkx = keyx + 80 - remainderkx;
+		int remainderky = keyk % 80;
+		int numky = keyk + 80 - remainderky;	
+		if(Math.abs(numy - numky) == Math.abs(numx - numkx)){
+			return true; 	//bishop 
+			}
+		else if ((keyk - 20 < mouseY  && mouseY < keyk + 60 ) || (keyx - 16 < mouseX && mouseX < keyx + 64)){
+			return true; // rook
+		}
+		else
+			return false;
+	}
+	public boolean kingMovement(int mouseX, int mouseY, int keyx, int keyk){
+		if((keyk - 100 < mouseY && keyk - 20 > mouseY && keyx-16 <mouseX && keyx + 64 > mouseX)){
+			return true; //move up
+		}
+		else if(keyk - 100 < mouseY && keyk - 20 > mouseY && keyx + 144 > mouseX && keyx + 64 < mouseX){
+			return true; // move right  up
+		}
+		else if (keyk - 100 < mouseY && keyk - 20 > mouseY && keyx - 16 > mouseX && keyx - 96 < mouseX){
+			return true; // move left up
+		}
+		else if (keyx + 144 > mouseX && keyx + 64 < mouseX && keyk - 20 < mouseY && keyk + 60 > mouseY){
+			return true; // move right
+		}
+		else if (keyx - 16 > mouseX && keyx - 96 < mouseX && keyk - 20 < mouseY && keyk + 60 > mouseY){
+			return true; // move left
+		}
+		else if (keyx-16 <mouseX && keyx + 64 > mouseX && keyk + 60 < mouseY && keyk + 140 > mouseY){
+			return true; // move down 
+		}
+		else if (keyx - 16 > mouseX && keyx - 96 < mouseX && keyk + 60 < mouseY && keyk + 140 > mouseY ){
+			return true;//move down left
+		}
+		else if (keyk + 60 < mouseY && keyk + 140 > mouseY &&  keyx + 144 > mouseX && keyx + 64 < mouseX){
+			return true; // move down right
+		}
+		else 
+			return false;
+		
+	}
+	public boolean knightMovement(int mouseX, int mouseY, int keyx, int keyk) {
+		if(keyx + 144 > mouseX && keyx + 64 < mouseX && mouseY < keyk - 100 && mouseY > keyk - 180){
+			return true; // up 2 right 1
+		}
+		else if (keyx + 144 > mouseX && keyx + 64 < mouseX && mouseY > keyk + 140 && mouseY <  keyk + 220){
+			return true; // down 2 right 1
+		}
+		else if (keyx - 16 > mouseX && keyx - 96 < mouseX  && mouseY < keyk - 100 && mouseY > keyk - 180){
+			return true; // up 2 left 1
+		}
+		else if (keyx - 16 > mouseX && keyx - 96 < mouseX && mouseY > keyk + 140 && mouseY <  keyk + 220){
+			return true; // down 2 left 1
+		}
+		else if (keyk - 100 < mouseY && keyk - 20 > mouseY && mouseX > keyx + 144 && mouseX < keyx + 224){
+			return true; // up 1 right 2
+		}
+		else if (mouseX > keyx + 144 && mouseX < keyx + 224 && keyk + 60 < mouseY && keyk + 140 > mouseY){
+			return true; // down 1 right 2
+		}
+		else if (keyk - 100 < mouseY && keyk - 20 > mouseY && keyx-96 > mouseX && mouseX > keyx - 176){
+			return true; // up 1 left 2
+		}
+		else if (keyx-96 > mouseX && mouseX > keyx - 176 && keyk + 60 < mouseY && keyk + 140 > mouseY){
+			return true;// down 1 left 2
+		}
+		else 
+			return false;
+	}
+	}
