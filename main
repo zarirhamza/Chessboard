@@ -1,0 +1,154 @@
+import processing.core.*;
+
+public class Chessboard extends PApplet{
+	PImage king;
+	PImage queen;
+	PImage rook;
+	PImage bishop;
+	PImage knight;	
+	int rookx = 16; int rooky = 580;
+	int knightx = 96;int knighty = 580;
+	int bishopx = 176; int bishopy = 580;
+	int kingx = 256; int kingy = 580;
+	int queenx = 336; int queeny = 580;
+	int keyx,keyk = 0;
+	boolean changePiece = true;
+	public void setup(){
+		size (640, 641);
+		background(156);
+		String url_king = "http://www.wpclipart.com/recreation/games/chess/chess_set_1/chess_piece_white_king.png";
+		String url_queen = "http://www.wpclipart.com/recreation/games/chess/chess_set_1/.cache/chess_piece_white_queen.png";
+		String url_rook = "http://www.wpclipart.com/recreation/games/chess/chess_set_1/.cache/chess_piece_white_rook.png";
+		String url_bishop = "http://www.wpclipart.com/recreation/games/chess/chess_set_1/.cache/chess_piece_white_bishop.png";
+		String url_knight = "http://www.wpclipart.com/recreation/games/chess/chess_set_1/.cache/chess_piece_white_knight.png";
+		king = loadImage(url_king, "png");
+		queen = loadImage(url_queen, "png");
+		rook = loadImage(url_rook, "png");
+		bishop = loadImage(url_bishop, "png");
+		knight = loadImage(url_knight, "png");
+	}
+	public void draw(){
+		for(int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+			if ((i+j)%2 == 1)
+				fill(0,0,0);
+			else
+				fill(255,255,255);
+		rect(80*i, 80*j,80,80);
+		}
+		}
+		image(rook, rookx, rooky,50,50);
+		image(knight, knightx, knighty,50,50);
+		image(bishop, bishopx, bishopy,50,50);
+		image(king, kingx, kingy,50,50);
+		image(queen, queenx, queeny,50,50);
+		if(key == 'r' && changePiece == true){
+			rookx = 16;  rooky = 580;
+			 knightx = 1000; knighty = 369;
+			 bishopx = 1000; bishopy = 469;
+			 kingx = 1100;  kingy = 369;
+			 queenx = 1100; queeny = 469;
+			 keyx = rookx;
+			 keyk = rooky;
+		}
+		else if(key == 'q'&& changePiece == true){
+			queenx = 336;  queeny = 580;
+			knightx = 1000; knighty = 369;
+			 bishopx = 1000; bishopy = 469;
+			 kingx = 1100;  kingy = 369;
+			 rookx = 1100; rooky = 469;
+			 keyx = queenx;
+			 keyk = queeny;
+		}
+		else if(key == 'b'&&changePiece == true){
+			bishopx = 176;  bishopy = 580;
+			knightx = 1000; knighty = 369;
+			 queenx = 1000; queeny = 469;
+			 kingx = 1100;  kingy = 369;
+			 rookx = 1100; rooky = 469;
+			 keyx = bishopx;
+			 keyk = bishopy;
+		}
+		else if(key == 'n'&&changePiece == true){
+			knightx = 96; knighty = 580;
+			 bishopx = 1000; bishopy = 369;
+			 queenx = 1000; queeny = 469;
+			 kingx = 1100;  kingy = 369;
+			 rookx = 1100; rooky = 469;
+			 keyx = knightx;
+			 keyk = knighty;
+		}
+		else if(key == 'k'&&changePiece == true){
+			kingx = 256; kingy = 580;
+			bishopx = 1000; bishopy = 369;
+			 queenx = 1000; queeny = 469;
+			 knightx = 1100;  knighty = 369;
+			 rookx = 1100; rooky = 469;
+			 keyx = kingx;
+			 keyk = kingy;
+		}
+		else if (key == 's'){
+			changePiece = true;
+			rookx = 16;  rooky = 580;
+			knightx = 96;knighty = 580;
+			 bishopx = 176;  bishopy = 580;
+			kingx = 256;  kingy = 580;
+			 queenx = 336;  queeny = 580;
+			 keyx = 0; keyk = 0;			
+		}
+			
+	}	
+		Functions piece = new Functions();
+		public void mouseClicked(){
+			if(key == 'r'){
+			if( piece.rookMovement(mouseX, mouseY,keyx, keyk)){
+				rookx = mouseX ;
+				rooky = mouseY;
+				keyx = rookx;
+				keyk = rooky;
+				changePiece = false;
+			}
+			}
+			else if (key == 'b'){
+				if(piece.bishopMovement(mouseX,mouseY,keyx,keyk)){
+					bishopx = mouseX;
+					bishopy = mouseY;
+					keyx = bishopx;
+					keyk = bishopy;
+					changePiece = false;
+				}
+			}
+			else if (key == 'q'){
+			if(piece.queenMovement(mouseX,mouseY,keyx,keyk)){	
+				queenx = mouseX;
+				queeny = mouseY;
+				keyx = queenx;
+				keyk = queeny;
+				changePiece = false;
+			}
+			}
+			else if (key == 'k'){
+				if(piece.kingMovement(mouseX,mouseY,keyx,keyk)){
+				kingx = mouseX;
+				kingy = mouseY;
+				keyx = kingx;
+				keyk = kingy;
+				changePiece = false;
+				}
+			}
+			else if (key == 'n') {
+				System.out.println(mouseX);
+				if(piece.knightMovement(mouseX,mouseY, keyx,keyk)){
+				knightx = mouseX;
+				knighty = mouseY;
+				keyx = knightx;
+				keyk = knighty;
+				changePiece = false;
+			}
+			}
+		}
+	
+	public static void main(String[] args){
+		PApplet.main(new String[]{"--present" , "Chessboard"});
+	}
+}
